@@ -60,9 +60,9 @@ able to cope with bi-directional changes, handle file deletions and detect
 conflicts. 
 
 The syncer is somewhat special insofar that it does a multi-step-syncing
-which involves a local rsync and an activating on the remote system, in order to
+which involves a local rsync and an activation on the remote system, in order to
 make sure that the remote directory is replaced in one atomic operation. That
-is because the syncer was designed for a use-case where it's required that the
+is because the syncer was designed for a use-case where it is required that the
 directory is always in a consistent state. But this also means that it comes
 with some requirements:
 
@@ -94,7 +94,7 @@ stated in \ref{ssec:syncer-general}.
 % TODO: Draw and add drawing here
 
 There is one limitation to consider as of writing this documentation: Since
-anysyncd calls 'csync2 -x' unconditional, every time \textit{one} of the synced
+anysyncd calls 'csync2 -x' unconditionally, every time \textit{one} of the synced
 directories changes, all csync2 synchronisation groups
 are being processed.
 
