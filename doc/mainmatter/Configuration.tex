@@ -1,0 +1,18 @@
+\section{Configuration}
+\label{sec:configuration}
+
+anysyncd is configured in an ini-style configuration file \texttt{/etc/anysyncd/anysyncd.ini},
+with sections for each sync directory and a section named 'global' for global
+settings. 
+
+An example of that configuration file is delivered with the software
+itself and usually installed to the system-specific directories (e.g.
+/usr/share/doc/anysyncd/examples on Debian-based systems).
+
+Every directory that shall be synchronized by anysyncd reflects a section in
+the configuration file. The name for those sections can be chosen arbitrarily
+(within the rules given by the ini-style-format), but it is recommended to
+chose it wisley, since it is used in the log message of the daemon. Its
+configuration keys may vary, depending on the chosen syncer, which are described
+in section \ref{sec:syncers}.
+

@@ -1,0 +1,91 @@
+% ---- PDF settings ----
+\hypersetup{%
+        pdftitle={\Title},
+        pdfauthor={\Author},
+        bookmarksnumbered,
+        pdfstartview={FitB},
+        breaklinks={true},
+        colorlinks,
+        linkcolor={black},
+        citecolor={black},
+        filecolor={black},
+        menucolor={black},
+        urlcolor={black},
+        pagecolor={blank},
+        plainpages=false,
+}
+
+% ---- document layout ----
+\setlength{\headheight}{38pt}			% necessary so that table of contents is below the headline
+\pagestyle{fancy}
+\lhead[height=40pt]{\footnotesize\Title}
+\chead[height=40pt]{\raisebox{28pt}{\tiny}}
+\rhead[height=40pt]{\includegraphics[width=1cm]{graphics/credativ-logo.png}}
+\setlength{\headsep}{.5cm}			% necessary so that normal text is not too far away from headline
+
+% ---- Listings ----
+\lstset{
+	basicstyle=\footnotesize\ttfamily,	% the size of the fonts that are used for the code
+	frame=single,				% print a frame
+	columns=flexible,			% next 3 make resulting text copy&pasteable
+	showstringspaces=false,
+	upquote=true,
+        literate=%                              % allow literal UTF-8 German umlauts to be used
+                {Ä}{{\"A}}1
+                {ä}{{\"a}}1
+                {Ö}{{\"O}}1
+                {ö}{{\"o}}1
+                {Ü}{{\"U}}1
+                {ü}{{\"u}}1
+                {ß}{{\ss}}1,
+}
+
+%---- caption ---------------------------------------------
+\captionsetup{%
+	margin=1em,			% No margin for the caption
+	font=small,			% Set the font size to small
+	format=plain,			% Typesets the captions as a normal paragraph
+	labelfont=bf,			% Sets the font of the caption label to bold
+	parindent=1em,			% Sets the paragraph indention
+	textformat=period,		% The caption will be followed by a period
+	%hypcap=true			% Set hyperlink anchors to the float's beginning
+}
+
+% ---- watermark ----------------------------------------
+\ifEN{\SetWatermarkText{DRAFT}}         % set watermark text "DRAFT" for english documents
+\ifDE{\SetWatermarkText{Entwurf}}       % set watermark text "Entwurf" for german documents
+\SetWatermarkLightness{0.7}
+
+% New table styles
+\newcolumntype{V}[1]{%                          % Flattersatz für p; Trennung im ersten Wort möglich
+        >{\RaggedRight\arraybackslash\hspace{0pt}}p{#1}%
+}
+\newcolumntype{v}[1]{%                          % Flattersatz für p; keine Trennung
+        >{\raggedright \arraybackslash}p{#1}%
+}
+\newcolumntype{M}[1]{%                          % Flattersatz für m; Trennung im ersten Wort möglich
+        >{\RaggedRight\arraybackslash\hspace{0pt}}m{#1}%
+}
+\newcolumntype{R}[1]{%                          % Spaltenkopf um 90° gedreht
+        >{\begin{turn}{90}\begin{minipage}{#1}%
+                \RaggedRight\arraybackslash\hspace{0pt}}l
+        <{\end{minipage}\end{turn}}%
+}
+\newcommand*{\armultirow}[3]{%          % Ermöglich das Zusammenfassen von mehreren Zeilen
+        \multicolumn{#1}{#2}{%
+        \begin{picture}(0,0)%
+                \put(0,0){\begin{tabular}[t]{@{}#2@{}}#3\end{tabular}}%
+        \end{picture}%
+        }%
+}
+\makeatletter
+\newcolumntype{K}[1]{%                          % Zahlen zuerst am Dezimaltrenner, dann linksbündig
+        >{\DC@{.}{.}{#1}}l<{\DC@end}%
+}
+\makeatother
+
+% Colour definitions for coloured sections
+\colorlet{priorityhigh}{red!40}
+\colorlet{prioritymed}{orange!50}
+\colorlet{prioritylow}{yellow!40}
+\colorlet{priorityfine}{green!30}

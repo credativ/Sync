@@ -1,0 +1,42 @@
+\section{Tabellen}
+\label{sec:tables}
+
+Zum Verschönern von Tabellen benutzen wir die Bibliothek \texttt{booktabs}. Die
+zugehörige texdoc ist sehr ausführlich und geht auch auf die Ästhetik ein. Hier
+ein kurzes Beispiel, welches eine normale Tabelle und eine Tabelle mit
+überlangen Zeilen zeigt.
+
+\begin{table}[ht]
+  \begin{tabular}{llr}
+    \toprule
+    \multicolumn{2}{c}{Item} \\
+    \cmidrule(r){1-2}
+    Animal & Description & Price (\$) \\
+    \midrule
+    Gnat  & per gram & 13.65 \\
+          & each     &  0.01 \\
+    Gnu   & stuffed  & 92.50 \\
+    Emu   & stuffed  & 33.33 \\
+    Armadillo & frozen & 8.99 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Schöne Tabelle}
+  \label{fig:table:nice}
+\end{table}
+
+\begin{table}[ht]
+    \begin{tabular}{p{4cm}p{7cm}}
+    \toprule
+    Lorem & Ipsum \\
+    \midrule
+    Lorem ipsum dolor sit amet & consetetur sadipscing elitr, sed diam nonumy voluptua \\
+    justo duo & et ea rebum stet kasd \\
+    dolor & sit \\
+    Nam liber tempor cum soluta id quod mazim pacerat & nobis eleifend option congue nihil imperdiet doming \\
+    \bottomrule
+  \end{tabular}
+  \caption{Schöne Tabelle mit überlangen Elementen und fester Spaltenbreite}
+  \label{fig:table:nicebutlong}
+\end{table}
+
+

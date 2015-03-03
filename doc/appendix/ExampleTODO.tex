@@ -1,0 +1,40 @@
+\section{Bemerkungen und FIXMEs}
+\label{sec:todo}
+Das \textsf{todonotes} Package erlaubt es in Verbindung mit den \verb|\NOTE|
+und \verb|\FIXME| Makros auf einfache Weise Bemerkungen\NOTE{Beispiel Note}
+mit Informationen sowie noch vor Vollendung des Dokuments auf jeden Fall zu
+behebende Probleme\FIXME{Beispiel FIXME} einzufügen.
+Benutzt man diese Befehle innerhalb von überschriften, so tauchen sie auch
+im Inhaltsverzeichnis aus, wodurch man einen guten überblick erhalten kann,
+z.\,B.\ bei einer Aufgabenverteilung auf mehrere Autoren.
+Wie man dies nutzt, bleibt jedem Projekt selbst überlassen, die folgenden
+Abschnitte zeigen ein Beispiel.
+
+\subsection{Noch zu schreibender Abschnitt\FIXME{eho}}
+Hier wird \verb|\FIXME| genutzt, um den Autor, der sich um den Abschnitt
+kümmert zu kennzeichnen.
+
+\subsection{Noch zu prüfender Abschnitt\CHECK{eho}}
+Hier wird \verb|\CHECK| genutzt, um zu kennzeichnen, daß dieser Abschnitt
+fertig geschrieben, aber noch nicht Korrektur gelesen ist -- dabei wird der
+Autor weiterhin genannt, um auch ohne \texttt{git blame} beim Korrekturlesen
+auf der Couch den Überblick zu behalten. 
+
+\subsection{Fertiger Abschnitt\DONE{eho}}
+Hier wird \verb|\DONE| genutzt, um zu kennzeichnen, daß dieser Abschnitt
+fertig ist.
+Hier kann sich ein Korrekturleser natürlich auch eintragen.
+
+\subsection{Platzhalter für fehlende Grafiken}
+Weiterhin kann man mit dem \verb|\missingfigure| Befehl Platzhalter -- und
+Gedächtnisstützen -- für noch fehlende Graphiken einfügen, wie die in
+Abbildung~\ref{fig:missingfigure-example}.
+
+\begin{figure}[ht]
+  \missingfigure{Erläuternde Graphik}
+  \caption{Beispiel für Graphik-Platzhalter}
+  \label{fig:missingfigure-example}
+\end{figure}
+
+Mit dem \verb|\listoftodos| Befehl kann man zudem einen Index aller
+Bemerkungen und fehlenden Graphiken erzeugen lassen.

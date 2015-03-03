@@ -1,0 +1,28 @@
+% Text löschen, falls ungewünscht
+\begin{titlepage}
+\vspace*{\fill}
+\begin{center}
+\vfill
+{\includegraphics[width=3.5cm]{graphics/credativ-logo.png}}
+\vfill
+{\Large \bf \Title}
+\vfill
+{\Large \bf \VersionNumber}
+\end{center}
+
+\vfill
+\begin{center}
+\begin{tabular}{ll}
+\ifDE{Erstellt am}\ifEN{Created on}:& \today \\
+\\
+\ifDE{Autor(en)}\ifEN{Author(s)}: & \Author \\
+\\
+Review\ifDE{-Autor}\ifEN{ Author}: & \ReviewAuthor \\
+\\
+& credativ GmbH \\
+& Hohenzollernstr. 133 \\
+& 41061 Mönchengladbach \\
+& Tel\ifDE{.}\ifEN{:} +49~2161~4643-0 \\
+\end{tabular}
+\end{center}
+\end{titlepage}

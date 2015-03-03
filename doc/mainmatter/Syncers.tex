@@ -1,0 +1,100 @@
+\section{Syncers}
+\label{sec:syncers}
+
+anysyncd comes with two syncers (action modules) for different purposes:
+
+\begin{description}
+    \item[Anysyncd::Action::Rsync2] rsync-based synchronisation for
+    uni-directional syncing of directories.  
+    \item[Anysyncd::Action::Csync2] csync2-based
+    \footnote{http://oss.linbit.com/csync2/} synchronisation for bi-directional
+    syncing of directories with automatic conflict resolution
+\end{description}
+
+Note that some syncers may require additional work to be done outside of
+anysyncd, e.g. exchange of ssh keys for an rsync via ssh. These steps are out
+of scope for this document.
+
+\subsection{General parameters}
+\label{ssec:syncer-general}
+The following configuration keys are supported in each sync configuration,
+regardless of the chosen syncers.
+
+\begin{description}
+    \item[watcher] Specifies which directory is watched for inotify events.
+
+    \item[cron] Allows to schedule regular syncs, additionally to the inotify-
+        based ones. The given configuration string must be a crontab-style
+        schedule-declaration (the first five fields of a crontab line)
+    \item[waiting_time] Allows to override the time span in seconds, in which
+        inotify events are aggregated after an inotify event occured. This
+        defaults to 5 seconds, which is usually a good compromise between
+        sync lag and efficient use of bandwith.
+\end{description}
+
+\subsection{Anysyncd::Action::Rsync2}
+
+The rsync-syncer is aimed at the classical use-case, where one wants to sync
+all files in a directory to another directory or host, every time a file in the
+directory changes. It may call rsync2 multiple times, to make sure source
+and destination are really in sync.
+
+The syncer supports the following parameters additionally to those
+stated in \ref{ssec:syncer-general}.
+
+\begin{description}
+    \item[from] Specifies the source, where to sync from. Should usually be
+        identical to the directory specified as watcher, as described in
+        \ref{ssec:syncer-general}
+
+    \item[to] Specifies the destination, where to sync to. This should be a
+        dest specification as used on a rsync commandline, e.g.
+        user@host:/foo/bar/ for ssh.
+\end{description}
+
+\subsection{Anysyncd::Action::Csync2}
+
+If changes could occur on both sides (even if only by accident) this syncer
+can be used. It uses csync2 to synchronize source and destination, which is
+able to cope with bi-directional changes, handle file deletions and detect
+conflicts. 
+
+The syncer is somewhat special insofar that it does a multi-step-syncing
+which involves a local rsync and an activating on the remote system, in order to
+make sure that the remote directory is replaced in one atomic operation. That
+is because the syncer was designed for a use-case where it's required that the
+directory is always in a consistent state. But this also means that it comes
+with some requirements:
+
+\begin{itemize}
+    \item Some directories MUST be defined. See the parameters below for more
+        information.
+    \item The user running anysyncd must be able to ssh into the configured
+        remote_hosts password-less.
+    \item csync2 needs to be configured according to the csync2
+        documentation.\footnote{http://oss.linbit.com/csync2/paper.pdf} 
+\end{itemize}
+
+The syncer supports the following parameters additionally to those
+stated in \ref{ssec:syncer-general}.
+
+\begin{description}
+    \item[prod_dir] Specifies the source, where to sync from. Should usually be
+        identical to the directory specified as watcher, as described in
+        \ref{ssec:syncer-general}. Required.
+
+    \item[csync_dir] Specifies the directory which is configured as include
+        directory (target and source) in csync2. Required.
+
+    \item[remote_hosts] Specifies the remote_hosts to which the source is
+        synced. Needed for the remote activation ("commit") to work.
+\end{description}
+
+%% The exact process of a sync with this sycer is illustrated below:
+% TODO: Draw and add drawing here
+
+There is one limitation to consider as of writing this documentation: Since
+anysyncd calls 'csync2 -x' unconditional, every time \textit{one} of the synced
+directories changes, all csync2 synchronisation groups
+are being processed.
+

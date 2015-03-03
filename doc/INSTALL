@@ -1,0 +1,14 @@
+The following packages are needed in Debian (wheezy) to build this template:
+* make
+* latexmk
+* latex-xcolor
+* lmodern
+* pgf
+* texlive-latex-recommended
+* texlive-fonts-recommended
+* texlive-latex-extra
+* texlive-lang-german
+
+The draftwatermark package in the texlive-latex-extra of Debian squeeze does
+not support the "final" nor "nostamp" options and thus does not get disabled
+by using those as document class options.

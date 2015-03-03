@@ -1,0 +1,8 @@
+\section{Introduction}
+\label{sec:intro}
+
+anysyncd provides a generic framework for file syncing, based on inotify. It
+watches configured directories, aggregates and combines events for a
+configurable span of seconds, and then lets a handler module stem the hard
+work, e.g. sync the directory with rsync or csync2.
+

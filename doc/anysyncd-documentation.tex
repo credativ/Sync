@@ -1,0 +1,36 @@
+\documentclass[
+	paper=a4,
+	pagesize=auto,
+	titlepage,
+	11pt,
+	%draft,	% output no graphics, listings, hyperrefs; plus a draft watermark
+	final,	% the opposite of "draft"
+%	stamp,	% like "final", but still print the draft watermark
+	%parskip=half, % separate paragraphs by space instead of indenting them
+]{scrartcl}	% main options; we use article, so no chapters
+
+% ---- Preamble ----
+
+\input{preamble/packages}
+\input{preamble/hyphenation}
+\input{preamble/TemplateVariables}
+\input{preamble/settings}
+
+% ---- document ----
+
+\begin{document}
+\selectlanguage{ngerman}        % Choose language here (from the options
+                                % given to the babel package)
+\input{preamble/TitlePage}	% titlepage with neat logo
+\tableofcontents		% Inhaltsverzeichnis
+\clearpage			% we don't want text directly below table of contents
+
+% begin of the actual content
+% use one \input for every section
+\input{mainmatter/Introduction}
+\input{mainmatter/Configuration}
+\input{mainmatter/Syncers}
+
+% appendix, if there is one
+
+\end{document}
